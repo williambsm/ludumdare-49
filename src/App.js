@@ -1,47 +1,23 @@
 import './App.scss';
 import './components/Hud';
+import Submarine from './components/Submarine';
 import Hud from './components/Hud';
 import React, { useState } from 'react';
 
 function App() {
+  // Submarine.
+  const [submarineLevel, setSubmarineLevel] = useState(1);
+  const [submarineHull, setSubmarineHull] = useState(100);
+  const [submarineMaxHull, setSubmarineMaxHull] = useState(100);
+  const [submarineOxygen, setSubmarineOxygen] = useState(100);
+  const [submarineMaxOxygen, setSubmarineMaxOxygen] = useState(100);
+  const [submarinePower, setSubmarinePower] = useState(100);
+  const [submarineMaxPower, setSubmarineMaxPower] = useState(100);
+
   const [dive, setDive] = useState({
     'started': false,
     'depth': 0,
   });
-
-  const [sub, setSub] = useState({
-    'level': 1,
-    'hull': 100,
-    'oxygen': 100,
-    'power': 100,
-  })
-
-  function setHull(amount) {
-    setSub(prevSub => prevSub = {
-      'level': prevSub.level,
-      'hull': prevSub.hull + amount,
-      'oxygen': prevSub.oxygen,
-      'power': prevSub.power,
-    });
-  }
-
-  function setPower(amount) {
-    setSub(prevSub => prevSub = {
-      'level': prevSub.level,
-      'hull': prevSub.hull,
-      'oxygen': prevSub.oxygen,
-      'power': prevSub.power + amount,
-    });
-  }
-
-  function setOxygen(amount) {
-    setSub(prevSub => prevSub = {
-      'level': prevSub.level,
-      'hull': prevSub.hull,
-      'oxygen': prevSub.oxygen + amount,
-      'power': prevSub.power,
-    });
-  }
 
   function startDive() {
     setDive(prevDive => prevDive = {
@@ -54,15 +30,15 @@ function App() {
         'started': prevDive.started,
         'depth': prevDive.depth + 1,
       })
+      console.log(diving);
     }, 1000);
-    console.log(diving)
   }
 
   return (
     <div className="App">
-      <Hud sub={sub}/>
+      <Hud hull={submarineHull} maxHull={submarineMaxHull} oxygen={submarineOxygen} maxOxygen={submarineMaxOxygen} power={submarinePower} maxPower={submarineMaxPower}/>
       <div className="water">
-        <img alt='sub-lv1' src={`/submarine/level${sub.level}.svg`} onClick={() => setHull(-10)} />
+        <Submarine level={submarineLevel} hull={submarineHull} setHull={setSubmarineHull} />
         <button onClick={() => startDive()}>Start Dive!</button>
         <p>Depth: {dive.depth}m</p>
       </div>
