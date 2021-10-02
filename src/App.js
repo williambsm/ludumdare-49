@@ -10,6 +10,7 @@ function App() {
   });
 
   const [sub, setSub] = useState({
+    'level': 1,
     'hull': 100,
     'oxygen': 100,
     'power': 100,
@@ -17,6 +18,7 @@ function App() {
 
   function setHull(amount) {
     setSub(prevSub => prevSub = {
+      'level': prevSub.level,
       'hull': prevSub.hull + amount,
       'oxygen': prevSub.oxygen,
       'power': prevSub.power,
@@ -25,6 +27,7 @@ function App() {
 
   function setPower(amount) {
     setSub(prevSub => prevSub = {
+      'level': prevSub.level,
       'hull': prevSub.hull,
       'oxygen': prevSub.oxygen,
       'power': prevSub.power + amount,
@@ -33,6 +36,7 @@ function App() {
 
   function setOxygen(amount) {
     setSub(prevSub => prevSub = {
+      'level': prevSub.level,
       'hull': prevSub.hull,
       'oxygen': prevSub.oxygen + amount,
       'power': prevSub.power,
@@ -51,15 +55,16 @@ function App() {
         'depth': prevDive.depth + 1,
       })
     }, 1000);
+    console.log(diving)
   }
 
   return (
     <div className="App">
       <Hud sub={sub}/>
       <div className="water">
-        <button onClick={() => setHull(-20)}>Boom!</button>
+        <img alt='sub-lv1' src={`/submarine/level${sub.level}.svg`} onClick={() => setHull(-10)} />
         <button onClick={() => startDive()}>Start Dive!</button>
-        <p>depth: {dive.depth}</p>
+        <p>Depth: {dive.depth}m</p>
       </div>
     </div>
   );
