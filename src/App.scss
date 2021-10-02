@@ -1,20 +1,10 @@
 .App {
   text-align: center;
-
-  &-logo {
-    height: 40vmin;
-    pointer-events: none;
-  }
+  
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+.water {
+  background-color: #1e489c;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -24,15 +14,68 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.hull {
+  position: fixed;
+  right: 20px;
+  top: 18px;
+  width: 240px;
+
+  &__frame {
+    color: white;
+    position: absolute;
+    top: 0;
+    outline: 1px solid white;
+    width: 240px;
+    height: 24px;
+  }
+
+  &__bar {
+    width: 240px;
+    height: 24px;
+    background-color: rgb(126, 126, 126);
+  }
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.power {
+  position: fixed;
+  right: 20px;
+  top: 56px;
+  width: 240px;
+
+  &__frame {
+    color: white;
+    position: absolute;
+    top: 0;
+    outline: 1px solid white;
+    width: 240px;
+    height: 24px;
   }
-  to {
-    transform: rotate(360deg);
+
+  &__bar {
+    top: 56px;
+    height: 24px;
+    background-color: rgb(148, 0, 0);
+  }
+}
+
+.oxygen {
+  position: fixed;
+  right: 20px;
+  top: 96px;
+  width: 240px;
+
+  &__frame {
+    color: white;
+    position: absolute;
+    top: 0;
+    outline: 1px solid white;
+    width: 240px;
+    height: 24px;
+  }
+
+  &__bar {
+    width: 240px;
+    height: 24px;
+    background-color: rgb(89, 163, 212);
   }
 }
