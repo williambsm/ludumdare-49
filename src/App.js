@@ -15,10 +15,26 @@ function App() {
     'power': 100,
   })
 
-  function loseHull(amount) {
+  function setHull(amount) {
     setSub(prevSub => prevSub = {
-      'hull': prevSub.hull - amount,
+      'hull': prevSub.hull + amount,
       'oxygen': prevSub.oxygen,
+      'power': prevSub.power,
+    });
+  }
+
+  function setPower(amount) {
+    setSub(prevSub => prevSub = {
+      'hull': prevSub.hull,
+      'oxygen': prevSub.oxygen,
+      'power': prevSub.power + amount,
+    });
+  }
+
+  function setOxygen(amount) {
+    setSub(prevSub => prevSub = {
+      'hull': prevSub.hull,
+      'oxygen': prevSub.oxygen + amount,
       'power': prevSub.power,
     });
   }
@@ -29,7 +45,7 @@ function App() {
       'depth': prevDive.depth,
     })
 
-    setInterval(() => {
+    const diving = setInterval(() => {
       setDive(prevDive => prevDive = {
         'started': prevDive.started,
         'depth': prevDive.depth + 1,
@@ -41,7 +57,7 @@ function App() {
     <div className="App">
       <Hud sub={sub}/>
       <div className="water">
-        <button onClick={() => loseHull(20)}>Boom!</button>
+        <button onClick={() => setHull(-20)}>Boom!</button>
         <button onClick={() => startDive()}>Start Dive!</button>
         <p>depth: {dive.depth}</p>
       </div>
