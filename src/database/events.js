@@ -10,12 +10,12 @@ const events = [
         'actions': [
             {
                 name: 'Fix',
-                affects: 'Hull',
+                affects: 'Power',
                 amount: -10,
             },
             {
                 name: 'Look Away',
-                affects: 'Power',
+                affects: 'Hull',
                 amount: -10,
             }
         ]
