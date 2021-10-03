@@ -2,7 +2,7 @@ const events = [
     {
         'id': 1,
         'name': 'bad thing',
-        'btn': [
+        'actions': [
             'OK', 'Not OK'
         ]
     }
