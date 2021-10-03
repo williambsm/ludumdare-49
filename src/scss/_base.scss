@@ -2,3 +2,34 @@ body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
 }
+
+.button {
+  display: block;
+  width: 200px;
+  height: 40px;
+  border-radius: 15px;
+  border: 2px white solid;
+  background-color: #57afff;
+  color: white;
+  font-weight: 700;
+  transition: .1s all ease;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+
+  &:hover {
+    transform: scale(1.05) perspective(1px);
+    backface-visibility: hidden;
+    background-color: #45a4ff;
+  }
+
+  &.hiding {
+    opacity: 0;
+    transition: .5s opacity ease;
+  }
+
+  &.hidden {
+    display: block;
+    opacity: 0;
+    pointer-events: none;
+  }
+}

@@ -6,6 +6,7 @@ import Submarine from "./components/Submarine";
 import submarines from "./database/submarines";
 import Event from './components/Event';
 import events from './database/events';
+import StartButton from "./components/StartButton";
 
 function Game() {
   let diving;
@@ -57,10 +58,9 @@ function Game() {
     <div className="App">
       <Hud sub={sub} />
       <div className="water">
-        <Event game={game} sub={sub} event={event}/>
+        <Event game={game} sub={sub} event={event} />
         <Submarine sub={sub} />
-        <button onClick={game.startDive}>Start Dive!</button>
-        <button onClick={game.pauseDive}>Pause Dive!</button>
+        <StartButton game={game} />
         <p>Depth: {game.depth}m</p>
       </div>
     </div>
