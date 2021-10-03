@@ -1,6 +1,6 @@
 import events from "../database/events";
 
-function Event({dive, sub, event}) {
+function Event({game, sub, event}) {
     function effect(attr, amount) {
         switch (attr) {
             case 'Hull':
@@ -24,7 +24,7 @@ function Event({dive, sub, event}) {
                     return (
                         <button key={index} onClick={() => {
                             effect(action.affects, action.amount)
-                            dive.startDive();
+                            game.startDive();
                         }}>{action.name}</button>
                     )
                 })}
