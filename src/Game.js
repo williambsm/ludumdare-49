@@ -6,6 +6,7 @@ import Submarine from "./components/Submarine";
 import submarines from "./database/submarines";
 import Event from './components/Event';
 import events from './database/events';
+import StartButton from "./components/StartButton";
 
 function Game() {
   let intervals = {
@@ -15,17 +16,17 @@ function Game() {
 
   const [event, setEvent] = useState(events[0]);
 
-  const [dive, setDive] = useState({
+  const [game, setGame] = useState({
     'depth': 0,
 
     startDive: function() {
       setEvent(events[0]);
       intervals.diving = (setInterval(() => {
-        setDive(prevDive => { return {...prevDive, 'depth': prevDive.depth + 1}});
+        setGame(prevGame => { return {...prevGame, 'depth': prevGame.depth + 1}});
       }, 1000))
       setTimeout(() => {
         intervals.eventTriggering = (setInterval(() => {
-          dive.triggerEvent(5)
+          game.triggerEvent(5)
         }, 1000))
       }, 10000);
     },
@@ -38,7 +39,7 @@ function Game() {
     triggerEvent: function(oneInX) {
       const trigger = Math.floor(Math.random() * oneInX) === 0;
       if(trigger) {
-          dive.pauseDive();
+          game.pauseDive();
           setEvent(events[1]);
       } else {
       }
@@ -64,29 +65,28 @@ function Game() {
   });
 
   useEffect(() => {
-    if (dive.depth === 1000) {
-      dive.pauseDive();
+    if (game.depth === 1000) {
+      game.pauseDive();
       setEvent(events[2]);
     }
     if (sub.hull <= 0) {
-      dive.pauseDive();
+      game.pauseDive();
       setEvent(events[3]);
     }
     if (sub.oxygen <= 0) {
-      dive.pauseDive();
+      game.pauseDive();
       setEvent(events[4]);
-    }}, [dive, event, sub]
+    }}, [game, event, sub]
   )
 
   return (
     <div className="App">
       <Hud sub={sub} />
       <div className="water">
-        <Event dive={dive} sub={sub} event={event}/>
+        <Event game={game} sub={sub} event={event} />
         <Submarine sub={sub} />
-        <button onClick={dive.startDive}>Start Dive!</button>
-        <button onClick={dive.pauseDive}>Pause Dive!</button>
-        <p>Depth: {dive.depth}m</p>
+        <StartButton game={game} />
+        <p>Depth: {game.depth}m</p>
       </div>
     </div>
   );
