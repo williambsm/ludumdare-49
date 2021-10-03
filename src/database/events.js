@@ -9,7 +9,16 @@ const events = [
         'id': 1,
         'name': 'Hull Breach!',
         'actions': [
-            'Fix(-10 Power)', 'Look away(-10 Hull)'
+            {
+                name: 'Fix',
+                affects: 'Hull',
+                amount: -10,
+            },
+            {
+                name: 'Look Away',
+                affects: 'Power',
+                amount: -10,
+            }
         ]
     }
 ]
