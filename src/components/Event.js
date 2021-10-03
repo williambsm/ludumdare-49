@@ -1,27 +1,20 @@
 import { useState } from 'react/cjs/react.development';
 
-function Event({e, sub, dive}) {
-    const [visibility, setVisibility] = useState('hidden');
-
-    if(e) {
-        return (
-            <div className={`event ${visibility}`}>
-                Event name: {e.name}
-                {e.actions.map((action, index) => {
+function Event({game, sub, event}) {
+    return (
+        <div>
+            {event.name}
+            <div>
+                {event.actions.map((action, index) => {
                     if(index === 0) {
-                        return <button onClick={() => sub.setHull(+10)}>{action}</button>
+                        return <button key={index} onClick={() => {sub.setHull(+10); game.startDive()}}>{action}</button>
                     } else {
-                        return <button onClick={() => sub.setHull(-10)}>{action}</button>
+                        return <button key={index} onClick={() => {sub.setHull(-10); game.startDive()}}>{action}</button>
                     }
                 })}
             </div>
-        )
-    } else {
-        return (
-            <div />
-        )
-    }
-
+        </div>
+    )
 }
 
 export default Event;

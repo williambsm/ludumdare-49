@@ -5,24 +5,33 @@ import React, { useState, useEffect } from 'react';
 import Submarine from "./components/Submarine";
 import submarineDatabase from "./database/submarines";
 import Event from './components/Event';
+import events from './database/events';
 
 function App() {
 
   let diving;
 
-  const [event, setEvent] = useState();
+  const [event, setEvent] = useState(events[0]);
 
   const [game, setGame] = useState({
     'depth': 0,
-    'event': event,
     'diving': diving,
     startDive: function() {
+      setEvent(events[0]);
       diving = (setInterval(() => {
         setGame(prevGame => { return {...prevGame, 'depth': prevGame.depth + 1}});
+        game.triggerEvent(3)
       }, 1000))
     },
     pauseDive: function() {
         clearInterval(diving);
+    },
+    triggerEvent: function(oneInX) {
+      const trigger = Math.floor(Math.random() * oneInX) === 0;
+      if(trigger) {
+          game.pauseDive();
+          setEvent(events[1]);
+      }
     }
   });
 
@@ -49,7 +58,7 @@ function App() {
     <div className="App">
       <Hud sub={sub}/>
       <div className="water">
-        <Event game={game} sub={sub}/>
+        <Event game={game} sub={sub} event={event}/>
         <Submarine sub={sub} />
         <button onClick={game.startDive}>Start Dive!</button>
         <button onClick={game.pauseDive}>Pause Dive!</button>
