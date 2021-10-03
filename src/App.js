@@ -1,9 +1,9 @@
 import './App.scss';
 import './components/Hud';
-import Hud from './components/Hud';
 import React, { useState, useEffect } from 'react';
+import Hud from './components/Hud';
 import Submarine from "./components/Submarine";
-import submarineDatabase from "./database/submarines";
+import submarines from "./database/submarines";
 import Event from './components/Event';
 import events from './database/events';
 
@@ -39,7 +39,7 @@ function App() {
    * Submarine object.
    */
   const [sub, setSub] = useState({
-    ...submarineDatabase()[0],
+    ...submarines[0],
     setHull: function(amount) {
       setSub(prevSub => { return {...prevSub, 'hull': prevSub.hull + amount}});
     },
@@ -56,7 +56,7 @@ function App() {
 
   return (
     <div className="App">
-      <Hud sub={sub}/>
+      <Hud sub={sub} />
       <div className="water">
         <Event game={game} sub={sub} event={event}/>
         <Submarine sub={sub} />

@@ -4,7 +4,6 @@ const events = [
         'name': '',
         'actions': []
     },
-
     {
         'id': 1,
         'name': 'Hull Breach!',
