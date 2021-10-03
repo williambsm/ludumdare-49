@@ -7,9 +7,9 @@ const events = [
 
     {
         'id': 1,
-        'name': 'bad thing',
+        'name': 'Hull Breach!',
         'actions': [
-            'OK', 'Not OK'
+            'Fix(-10 Power)', 'Look away(-10 Hull)'
         ]
     }
 ]

@@ -1,5 +1,3 @@
-import { useState } from 'react/cjs/react.development';
-
 function Event({game, sub, event}) {
     return (
         <div>
@@ -7,7 +5,7 @@ function Event({game, sub, event}) {
             <div>
                 {event.actions.map((action, index) => {
                     if(index === 0) {
-                        return <button key={index} onClick={() => {sub.setHull(+10); game.startDive()}}>{action}</button>
+                        return <button key={index} onClick={() => {sub.setPower(-10); game.startDive()}}>{action}</button>
                     } else {
                         return <button key={index} onClick={() => {sub.setHull(-10); game.startDive()}}>{action}</button>
                     }

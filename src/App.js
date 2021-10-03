@@ -20,7 +20,7 @@ function App() {
       setEvent(events[0]);
       diving = (setInterval(() => {
         setGame(prevGame => { return {...prevGame, 'depth': prevGame.depth + 1}});
-        game.triggerEvent(3)
+        game.triggerEvent(5)
       }, 1000))
     },
     pauseDive: function() {
@@ -44,13 +44,13 @@ function App() {
       setSub(prevSub => { return {...prevSub, 'hull': prevSub.hull + amount}});
     },
     setPower: function(amount) {
-      setSub(prevSub => { return {...prevSub, 'hull': prevSub.power + amount}});
+      setSub(prevSub => { return {...prevSub, 'power': prevSub.power + amount}});
     },
     setOxygen: function(amount) {
-      setSub(prevSub => { return {...prevSub, 'hull': prevSub.oxygen + amount}});
+      setSub(prevSub => { return {...prevSub, 'oxygen': prevSub.oxygen + amount}});
     },
     setLevel: function(level) {
-      setSub(prevSub => { return {...prevSub, 'hull': prevSub.level + level}});
+      setSub(prevSub => { return {...prevSub, 'level': prevSub.level + level}});
     }
   });
 
