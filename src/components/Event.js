@@ -1,4 +1,6 @@
-function Event({game, sub, event}) {
+import events from "../database/events";
+
+function Event({dive, sub, event}) {
     function effect(attr, amount) {
         switch (attr) {
             case 'Hull':
@@ -11,7 +13,7 @@ function Event({game, sub, event}) {
             case 'Oxygen':
                 sub.setOxygen(amount)
                 break;
-        } 
+        }
     }
 
     return (
@@ -20,7 +22,10 @@ function Event({game, sub, event}) {
             <div>
                 {event.actions.map((action, index) => {
                     return (
-                        <button key={index} onClick={() => {effect(action.affects, action.amount); game.startDive()}}>{action.name}</button>
+                        <button key={index} onClick={() => {
+                            effect(action.affects, action.amount)
+                            dive.startDive();
+                        }}>{action.name}</button>
                     )
                 })}
             </div>

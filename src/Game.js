@@ -8,32 +8,42 @@ import Event from './components/Event';
 import events from './database/events';
 
 function Game() {
-  let diving;
+  let intervals = {
+    'diving': '',
+    'eventTriggering': '',
+  };
 
   const [event, setEvent] = useState(events[0]);
 
-  const [game, setGame] = useState({
+  const [dive, setDive] = useState({
     'depth': 0,
-    'diving': diving,
+
     startDive: function() {
       setEvent(events[0]);
-      diving = (setInterval(() => {
-        setGame(prevGame => { return {...prevGame, 'depth': prevGame.depth + 1}});
-        game.triggerEvent(5)
+      intervals.diving = (setInterval(() => {
+        setDive(prevDive => { return {...prevDive, 'depth': prevDive.depth + 1}});
       }, 1000))
+      setTimeout(() => {
+        intervals.eventTriggering = (setInterval(() => {
+          dive.triggerEvent(5)
+        }, 1000))
+      }, 10000);
     },
+
     pauseDive: function() {
-        clearInterval(diving);
+        clearInterval(intervals.diving);
+        clearInterval(intervals.eventTriggering);
     },
+
     triggerEvent: function(oneInX) {
       const trigger = Math.floor(Math.random() * oneInX) === 0;
       if(trigger) {
-          game.pauseDive();
+          dive.pauseDive();
           setEvent(events[1]);
+      } else {
       }
     }
   });
-
   /**
    * Submarine object.
    */
@@ -53,15 +63,30 @@ function Game() {
     }
   });
 
+  useEffect(() => {
+    if (dive.depth === 1000) {
+      dive.pauseDive();
+      setEvent(events[2]);
+    }
+    if (sub.hull <= 0) {
+      dive.pauseDive();
+      setEvent(events[3]);
+    }
+    if (sub.oxygen <= 0) {
+      dive.pauseDive();
+      setEvent(events[4]);
+    }}, [dive, event, sub]
+  )
+
   return (
     <div className="App">
       <Hud sub={sub} />
       <div className="water">
-        <Event game={game} sub={sub} event={event}/>
+        <Event dive={dive} sub={sub} event={event}/>
         <Submarine sub={sub} />
-        <button onClick={game.startDive}>Start Dive!</button>
-        <button onClick={game.pauseDive}>Pause Dive!</button>
-        <p>Depth: {game.depth}m</p>
+        <button onClick={dive.startDive}>Start Dive!</button>
+        <button onClick={dive.pauseDive}>Pause Dive!</button>
+        <p>Depth: {dive.depth}m</p>
       </div>
     </div>
   );

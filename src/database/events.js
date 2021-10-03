@@ -16,10 +16,43 @@ const events = [
             {
                 name: 'Look Away',
                 affects: 'Hull',
-                amount: -10,
+                amount: -50,
             }
         ]
-    }
+    },
+    {
+        'id': 2,
+        'name': 'You Won!',
+        'actions': [
+            {
+                name: 'Yay',
+                affects: 'Power',
+                amount: 0,
+            }
+        ]
+    },
+    {
+        'id': 3,
+        'name': 'Your submarine crumbled under immense pressure!',
+        'actions': [
+            {
+                name: 'Try again',
+                affects: 'Power',
+                amount: 0,
+            }
+        ]
+    },
+    {
+        'id': 4,
+        'name': 'You ran out of oxygen!',
+        'actions': [
+            {
+                name: 'Try again',
+                affects: 'Power',
+                amount: 0,
+            }
+        ]
+    },
 ]
 
 export default events;
