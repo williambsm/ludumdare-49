@@ -19,11 +19,9 @@ function Event({game, sub, event}) {
             {event.name}
             <div>
                 {event.actions.map((action, index) => {
-                    if(index === 0) {
-                        return <button key={index} onClick={() => {effect(action.affects, action.amount); game.startDive()}}>{action.name}</button>
-                    } else {
-                        return <button key={index} onClick={() => {effect(action.affects, action.amount); game.startDive()}}>{action.name}</button>
-                    }
+                    return (
+                        <button key={index} onClick={() => {effect(action.affects, action.amount); game.startDive()}}>{action.name}</button>
+                    )
                 })}
             </div>
         </div>
