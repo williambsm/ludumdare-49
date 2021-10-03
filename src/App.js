@@ -5,17 +5,26 @@ import React, { useState, useEffect } from 'react';
 import Submarine from "./components/Submarine";
 import submarineDatabase from "./database/submarines";
 import Event from './components/Event';
-import events from './events';
 
 function App() {
-  const [game, setGame] = useState({
-    'started': false,
-    'depth': 0,
-  });
 
-  const [diving, setDiving] = useState()
+  let diving;
 
   const [event, setEvent] = useState();
+
+  const [game, setGame] = useState({
+    'depth': 0,
+    'event': event,
+    'diving': diving,
+    startDive: function() {
+      diving = (setInterval(() => {
+        setGame(prevGame => { return {...prevGame, 'depth': prevGame.depth + 1}});
+      }, 1000))
+    },
+    pauseDive: function() {
+        clearInterval(diving);
+    }
+  });
 
   /**
    * Submarine object.
@@ -36,26 +45,14 @@ function App() {
     }
   });
 
-  function startDive() {
-    setGame(prevGame => { return {...prevGame, 'started': true}});
-
-    setDiving(setInterval(() => {
-      setGame(prevGame => { return {...prevGame, 'depth': prevGame.depth + 1}});
-    }, 1000))
-  };
-
-  function pauseDive() {
-    setDiving(clearInterval(diving));
-  };
-
   return (
     <div className="App">
       <Hud sub={sub}/>
       <div className="water">
-        <Event e={event} sub={sub} dive={startDive}/>
+        <Event game={game} sub={sub}/>
         <Submarine sub={sub} />
-        <button onClick={() => startDive()}>Start Dive!</button>
-        <button onClick={() => setDiving(pauseDive)}>Pause Dive!</button>
+        <button onClick={game.startDive}>Start Dive!</button>
+        <button onClick={game.pauseDive}>Pause Dive!</button>
         <p>Depth: {game.depth}m</p>
       </div>
     </div>
