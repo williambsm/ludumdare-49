@@ -2,6 +2,8 @@ import './App.scss';
 import './components/Hud';
 import Hud from './components/Hud';
 import React, { useState } from 'react';
+import Submarine from "./components/Submarine";
+import submarineDatabase from "./database/submarines";
 
 function App() {
   const [dive, setDive] = useState({
@@ -9,24 +11,21 @@ function App() {
     'depth': 0,
   });
 
+  /**
+   * Submarine object.
+   */
   const [sub, setSub] = useState({
-    'level': 1,
-    'hull': 100,
-    'oxygen': 100,
-    'power': 100,
-  })
-
-  function setHull(amount) {
-    setSub(prevSub => { return {...prevSub, 'hull': sub.hull + amount}});
-  }
-
-  function setPower(amount) {
-    setSub(prevSub => { return {...prevSub, 'hull': sub.power + amount}});
-  }
-
-  function setOxygen(amount) {
-    setSub(prevSub => { return {...prevSub, 'hull': sub.oxygen + amount}});
-  }
+    ...submarineDatabase()[1],
+    setHull: function(amount) {
+      setSub(prevSub => { return {...prevSub, 'hull': prevSub.hull + amount}});
+    },
+    setPower: function(amount) {
+      setSub(prevSub => { return {...prevSub, 'hull': prevSub.power + amount}});
+    },
+    setOxygen: function(amount) {
+      setSub(prevSub => { return {...prevSub, 'hull': prevSub.oxygen + amount}});
+    }
+  });
 
   function startDive() {
     setDive(prevDive => prevDive = {
@@ -47,7 +46,7 @@ function App() {
     <div className="App">
       <Hud sub={sub}/>
       <div className="water">
-        <img alt='sub-lv1' src={`/submarine/level${sub.level}.svg`} onClick={() => setHull(-10)} />
+        <Submarine sub={sub} />
         <button onClick={() => startDive()}>Start Dive!</button>
         <p>Depth: {dive.depth}m</p>
       </div>
