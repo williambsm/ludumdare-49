@@ -17,30 +17,15 @@ function App() {
   })
 
   function setHull(amount) {
-    setSub(prevSub => prevSub = {
-      'level': prevSub.level,
-      'hull': prevSub.hull + amount,
-      'oxygen': prevSub.oxygen,
-      'power': prevSub.power,
-    });
+    setSub(prevSub => { return {...prevSub, 'hull': sub.hull + amount}});
   }
 
   function setPower(amount) {
-    setSub(prevSub => prevSub = {
-      'level': prevSub.level,
-      'hull': prevSub.hull,
-      'oxygen': prevSub.oxygen,
-      'power': prevSub.power + amount,
-    });
+    setSub(prevSub => { return {...prevSub, 'hull': sub.power + amount}});
   }
 
   function setOxygen(amount) {
-    setSub(prevSub => prevSub = {
-      'level': prevSub.level,
-      'hull': prevSub.hull,
-      'oxygen': prevSub.oxygen + amount,
-      'power': prevSub.power,
-    });
+    setSub(prevSub => { return {...prevSub, 'hull': sub.oxygen + amount}});
   }
 
   function startDive() {
