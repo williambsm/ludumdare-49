@@ -1,0 +1,25 @@
+@keyframes sub-float {
+    0% {
+        transform: translateX(0px) rotate(-10deg);
+    }
+
+    25% {
+        transform: translateX(-20px) rotate(0deg);
+    }
+
+    50% {
+        transform: translateX(0px) rotate(10deg);
+    }
+
+    75% {
+        transform: translateX(20px) rotate(0deg);
+    }
+
+    100% {
+        transform: translateX(0px) rotate(-10deg);
+    }
+}
+
+.sub-float {
+    animation: sub-float 4s linear infinite;
+}
