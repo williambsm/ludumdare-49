@@ -1,4 +1,4 @@
-import './App.scss';
+import './scss/main.scss';
 import './components/Hud';
 import React, { useState, useEffect } from 'react';
 import Hud from './components/Hud';
@@ -7,8 +7,7 @@ import submarines from "./database/submarines";
 import Event from './components/Event';
 import events from './database/events';
 
-function App() {
-
+function Game() {
   let diving;
 
   const [event, setEvent] = useState(events[0]);
@@ -68,4 +67,4 @@ function App() {
   );
 }
 
-export default App;
+export default Game;
