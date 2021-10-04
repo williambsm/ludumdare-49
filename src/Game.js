@@ -7,6 +7,7 @@ import submarines from "./database/submarines";
 import Event from './components/Event';
 import events from './database/events';
 import StartButton from "./components/StartButton";
+import getRandomInt from './database/utilities';
 
 function Game() {
   let intervals = {
@@ -16,6 +17,8 @@ function Game() {
 
   const [event, setEvent] = useState(events[0]);
 
+  const [currency, setCurrency] = useState(0);
+
   const [game, setGame] = useState({
     'depth': 0,
 
@@ -23,10 +26,11 @@ function Game() {
       setEvent(events[0]);
       intervals.diving = (setInterval(() => {
         setGame(prevGame => { return {...prevGame, 'depth': prevGame.depth + 1}});
+        setCurrency(prevCurrency => { return prevCurrency + 1 })
       }, 1000))
       setTimeout(() => {
         intervals.eventTriggering = (setInterval(() => {
-          game.triggerEvent(5)
+          game.triggerEvent(2)
         }, 1000))
       }, 10000);
     },
@@ -40,9 +44,16 @@ function Game() {
       const trigger = Math.floor(Math.random() * oneInX) === 0;
       if(trigger) {
           game.pauseDive();
-          setEvent(events[1]);
-      } else {
+          setEvent(events[getRandomInt(1, 4)]);
       }
+    },
+
+    resetGame: function() {
+      if (sub.oxygen <= 0 || sub.hull <= 0) {
+        setCurrency(prevCurrency => { return prevCurrency - game.depth })
+      }
+      setGame(prevGame => { return {...prevGame, 'depth': 0}})
+      game.pauseDive();
     }
   });
   /**
@@ -67,24 +78,29 @@ function Game() {
   useEffect(() => {
     if (game.depth === 1000) {
       game.pauseDive();
-      setEvent(events[2]);
+      setEvent(events[4]);
     }
     if (sub.hull <= 0) {
       game.pauseDive();
-      setEvent(events[3]);
+      setEvent(events[5]);
     }
     if (sub.oxygen <= 0) {
       game.pauseDive();
-      setEvent(events[4]);
-    }}, [game, event, sub]
+      setEvent(events[6]);
+    }
+    if (game.depth % 100 === 0 && game.depth !== 0) {
+      game.pauseDive();
+      setEvent(events[7])
+    }
+  }, [game, event, sub]
   )
 
   return (
     <div className="App">
-      <Hud sub={sub} />
+      <Hud currency={currency} sub={sub} />
       <div className="water">
         <Event game={game} sub={sub} event={event} />
-        <Submarine sub={sub} />
+        <Submarine game={game} sub={sub} />
         <StartButton game={game} />
         <p>Depth: {game.depth}m</p>
       </div>

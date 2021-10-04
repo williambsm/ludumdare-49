@@ -4,7 +4,6 @@ function Event({game, sub, event}) {
     function effect(attr, amount) {
         switch (attr) {
             case 'Hull':
-                default:
                 sub.setHull(amount)
                 break;
             case 'Power':
@@ -12,6 +11,12 @@ function Event({game, sub, event}) {
                 break;
             case 'Oxygen':
                 sub.setOxygen(amount)
+                break;
+            case 'Reset':
+                game.resetGame()
+                break;
+            case 'Nothing':
+                default:
                 break;
         }
     }

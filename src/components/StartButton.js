@@ -1,13 +1,13 @@
 import {useState} from "react";
 
-function StartButton(props) {
+function StartButton({game}) {
     const [className, setClassName] = useState('button');
 
     function onClick() {
         setClassName('button hiding');
 
         setTimeout(() => {
-            props.game.startDive();
+            game.startDive();
             setClassName('button hidden');
         }, 500);
     }

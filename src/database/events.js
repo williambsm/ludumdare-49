@@ -1,3 +1,5 @@
+import getRandomInt from "./utilities";
+
 const events = [
     {
         'id': 0,
@@ -16,39 +18,82 @@ const events = [
             {
                 name: 'Look Away',
                 affects: 'Hull',
-                amount: -50,
+                amount: -10,
             }
         ]
     },
     {
         'id': 2,
-        'name': 'You Won!',
+        'name': 'Reactor Failure!',
         'actions': [
             {
-                name: 'Yay',
+                name: 'Pray',
                 affects: 'Power',
-                amount: 0,
+                amount: getRandomInt(-10, 5),
             }
         ]
     },
     {
         'id': 3,
-        'name': 'Your submarine crumbled under immense pressure!',
+        'name': 'Busted Pipe!',
         'actions': [
             {
-                name: 'Try again',
+                name: 'Fix',
                 affects: 'Power',
-                amount: 0,
+                amount: -10,
+            },
+            {
+                name: 'Look Away',
+                affects: 'Oxygen',
+                amount: -10,
             }
         ]
     },
     {
         'id': 4,
+        'name': 'You Won!',
+        'actions': [
+            {
+                name: 'Yay',
+                affects: 'Reset',
+                amount: 0,
+            }
+        ]
+    },
+    {
+        'id': 5,
+        'name': 'Your submarine crumbled under immense pressure!',
+        'actions': [
+            {
+                name: 'Try again',
+                affects: 'Reset',
+                amount: 0,
+            }
+        ]
+    },
+    {
+        'id': 6,
         'name': 'You ran out of oxygen!',
         'actions': [
             {
                 name: 'Try again',
+                affects: 'Reset',
+                amount: 0,
+            }
+        ]
+    },
+    {
+        'id': 7,
+        'name': 'Check Point',
+        'actions': [
+            {
+                name: 'Keep Going',
                 affects: 'Power',
+                amount: 0,
+            },
+            {
+                name: 'Extract',
+                affects: 'Reset',
                 amount: 0,
             }
         ]
